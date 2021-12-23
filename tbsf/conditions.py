@@ -5,9 +5,10 @@ import random
 # by their percent_chance of being applied.
 
 class Condition:
-    def __init__(self, name, percent_chance=100, *,
+    def __init__(self, name, percent_chance=100, description='', *,
             armor_bonus=0, damage_bonus=0, hp_bonus=0, mp_bonus=0):
         self.name = name
+        self.description = description
         self._armor = armor_bonus
         self._damage = damage_bonus
         self._hp = hp_bonus
@@ -36,4 +37,8 @@ class Condition:
         else:
             return 0
 
-CONDITIONS = []
+CONDITIONS = {
+    'blessed': Condition('Blessed', 100, 'Increases max hp and mp', hp_bonus=20, mp_bonus=10),
+    'blindness': Condition('Blindness', 50, 'Causes player to miss target (50% chance)', damage_bonus=-999),
+    'cursed': Condition('Cursed', 100, 'Decreases max hp and mp', hp_bonus=-10, mp_bonus=-5)
+}
